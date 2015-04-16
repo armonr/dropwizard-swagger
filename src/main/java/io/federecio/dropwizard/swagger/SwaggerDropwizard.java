@@ -29,7 +29,6 @@ import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 
@@ -68,7 +67,7 @@ public class SwaggerDropwizard<T extends Configuration> implements ConfiguredBun
      * does not work correctly.
      */
     public void onRun(T configuration, Environment environment, String host) {
-        onRun(configuration, environment, host, null, null, null);
+        onRun(configuration, environment, host, null, null, null, null);
     }
 
     /**
@@ -76,13 +75,13 @@ public class SwaggerDropwizard<T extends Configuration> implements ConfiguredBun
      * does not work correctly.
      */
     public void onRun(T configuration, Environment environment, String host, Integer port,
-                      String staticAssetPrefix) {
-        onRun(configuration, environment, host, port, staticAssetPrefix, null);
+                      String staticAssetPrefix, String urlPath) {
+        onRun(configuration, environment, host, port, staticAssetPrefix, null, urlPath);
     }
 
     public void onRun(T configuration, Environment environment, String host, Integer port,
-        String staticAssetPrefix, String tokenType) {
-        SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration, staticAssetPrefix);
+        String staticAssetPrefix, String tokenType, String urlPath) {
+        SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration, staticAssetPrefix, urlPath);
 
         final String rootPath = swaggerConfiguration.getJerseyRootPath();
         final String urlPattern = swaggerConfiguration.getUrlPattern();
@@ -93,7 +92,7 @@ public class SwaggerDropwizard<T extends Configuration> implements ConfiguredBun
             new AssetsBundle(Constants.SWAGGER_RESOURCES_PATH, rootPath + Constants.SWAGGER_URI_PATH, null, Constants.SWAGGER_ASSETS_NAME).run(environment);
         }
 
-        environment.jersey().register(new SwaggerResource(urlPattern, tokenType));
+        environment.jersey().register(new SwaggerResource(urlPattern, tokenType, urlPath));
 
         swaggerConfiguration.setUpSwaggerFor(host, port);
 

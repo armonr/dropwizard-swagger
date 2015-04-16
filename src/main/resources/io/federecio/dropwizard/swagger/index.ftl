@@ -82,6 +82,7 @@
     <form id='api_selector'>
       <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
       <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
+      <div class='input'><input id="input_urlPath" name="urlPath" type="hidden" value="${urlPath}"/></div>
       <div class='input'><a id="explore" href="#">Explore</a></div>
     </form>
   </div>

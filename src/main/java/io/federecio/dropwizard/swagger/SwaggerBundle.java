@@ -34,7 +34,8 @@ public class SwaggerBundle<T extends Configuration> extends SwaggerDropwizard<T>
                 onRun(configuration, environment);
             } else {
                 String host = StringUtils.isEmpty(bundleConfiguration.getHost()) ? SwaggerHostResolver.getSwaggerHost() : bundleConfiguration.getHost();
-                onRun(configuration, environment, host, bundleConfiguration.getPort(), bundleConfiguration.getStaticAssetPrefix());
+                onRun(configuration, environment, host, bundleConfiguration.getPort(),
+                      bundleConfiguration.getStaticAssetPrefix(), null, bundleConfiguration.getUrlPath());
             }
         } catch (IOException e) {
             throw new IllegalStateException(e);

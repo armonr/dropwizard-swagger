@@ -2344,12 +2344,15 @@ SwaggerOperation.prototype.encodePathParam = function (pathParam) {
 };
 
 SwaggerOperation.prototype.urlify = function (args) {
-  var i, j, param, url;
+  var i, j, param, url, urlPath;
+
+  urlPath = typeof args.urlPath !== "undefined" ? args.urlPath : '';
+
   // ensure no double slashing...
   if(this.resource.basePath.length > 1 && this.resource.basePath.slice(-1) === '/' && this.pathJson().charAt(0) === '/')
-    url = this.resource.basePath + this.pathJson().substring(1);
+    url = this.resource.basePath + urlPath + this.pathJson().substring(1);
   else
-    url = this.resource.basePath + this.pathJson();
+    url = this.resource.basePath + urlPath + this.pathJson();
   var params = this.parameters;
   for (i = 0; i < params.length; i++) {
     param = params[i];

@@ -38,10 +38,13 @@ public class SwaggerConfiguration {
 
     private final Configuration configuration;
     private final String staticAssetPrefix;
+    private final String urlPath;
 
-    public SwaggerConfiguration(Configuration configuration, String staticAssetPrefix) {
+    public SwaggerConfiguration(Configuration configuration, String staticAssetPrefix,
+                                String urlPath) {
         this.staticAssetPrefix = staticAssetPrefix;
         this.configuration = configuration;
+        this.urlPath = urlPath;
     }
 
     public void setUpSwaggerFor(String host, Integer port) {

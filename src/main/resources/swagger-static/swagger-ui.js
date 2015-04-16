@@ -1285,7 +1285,7 @@ OperationView = (function(_super) {
   };
 
   OperationView.prototype.submitOperation = function(e) {
-    var error_free, form, isFileUpload, map, o, opts, val, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
+    var error_free, form, isFileUpload, map, o, opts, val, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, urlPath;
     if (e != null) {
       e.preventDefault();
     }
@@ -1349,6 +1349,10 @@ OperationView = (function(_super) {
         if ((val != null) && jQuery.trim(val).length > 0) {
           map[o.name] = val;
         }
+      }
+      urlPath = $("#input_urlPath");
+      if (urlPath) {
+        map['urlPath'] = urlPath.val();
       }
       opts.responseContentType = $("div select[name=responseContentType]", $(this.el)).val();
       opts.requestContentType = $("div select[name=parameterContentType]", $(this.el)).val();
